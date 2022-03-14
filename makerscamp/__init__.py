@@ -31,6 +31,10 @@ def create_app(test_config=None):
     def home():
         return 'Hi, World!'
 
+    @app.route('/test')
+    def test():
+        return 'Hi, Test!'
+
     #rom . import db
     #db.init_app(app)
 
