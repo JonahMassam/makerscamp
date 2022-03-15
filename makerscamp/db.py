@@ -1,7 +1,3 @@
-class DB:
-  def test():
-    return "hi"
-
 import psycopg2
 import psycopg2.extras
 import click
@@ -40,3 +36,18 @@ def init_db_command():
 def init_app(app):
     app.teardown_appcontext(close_db)
     app.cli.add_command(init_db_command)
+
+
+class DB:
+  def test():
+    return "hi"
+
+  def exec(command):
+    db = get_db()
+    with db.cursor() as cur:
+      cur.execute(command)
+      db.commit()
+      if "SELECT" in command:
+        return cur.fetchall()
+      else:
+        return
