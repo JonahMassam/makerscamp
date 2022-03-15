@@ -27,22 +27,20 @@ def create_app(test_config=None):
     def hello():
         return 'Hello, World!'
 
-    @app.route('/')
-    def home():
-        return 'Hi, World!'
+    
+    #@app.route('/')
+    #def home():
+    #    return 'Hi, World!'
 
     @app.route('/test')
     def test():
         return 'Hi, Test!'
 
-    #rom . import db
-    #db.init_app(app)
+    from . import db
+    db.init_app(app)
 
-    #from . import auth
-    #app.register_blueprint(auth.bp)
-
-    #from . import posts
-    #app.register_blueprint(posts.bp)
-    #app.add_url_rule('/', endpoint='index')
+    from . import index
+    app.register_blueprint(index.bp)
+    app.add_url_rule('/', endpoint='home')
 
     return app
