@@ -1,4 +1,4 @@
-from makerscamp.classes.db import *
+from makerscamp.db import *
 
 class TestDBClass:
   def test_can_instance_class(self):
