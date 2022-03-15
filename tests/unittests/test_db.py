@@ -1,6 +1,6 @@
-from makerscamp.classes import db
+from makerscamp.classes.db import *
 
-class TestDBClass(BaseCase):
-  def test_can_instance_class():
+class TestDBClass:
+  def test_can_instance_class(self):
     new_db = DB
-    assert new_db.test == "hi"
+    assert new_db.test() == "hi"
