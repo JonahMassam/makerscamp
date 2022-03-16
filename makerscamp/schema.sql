@@ -1,11 +1,13 @@
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS channels;
 DROP TABLE IF EXISTS messages;
 DROP TABLE IF EXISTS user_channels;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS channels;
+
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
-    username text NOT NULL
+    username text NOT NULL,
+    password text NOT NULL
 );
 
 CREATE TABLE channels (
