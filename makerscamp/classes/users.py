@@ -1,6 +1,4 @@
 from makerscamp.db import *
-from flask.cli import with_appcontext
-from makerscamp import create_app
 
 db_conn = DB
 class User():
@@ -9,3 +7,6 @@ class User():
     def create(cls, username):
         #with create_app().app_context():
         db_conn.exec(f"INSERT INTO users (username) VALUES ('{username}')")
+
+    def __init__(self, username):
+        self.username = username
