@@ -1,17 +1,23 @@
-from makerscamp.classes import Users
+from makerscamp.db import *
+from makerscamp.classes.users import Users
 
 class TestUsers():
     """Testing for the Users class"""
 
-    def test_create_user():
+    def test_create_user(self):
         """confirm a user is entered into the database"""
+
+        # create a db
+        db = get_db()
+        cur = db.cursor()
 
         # send user's information to DB ( no instance )
         username = "Joe Bloggs"
         Users.create(username)
 
         # get all results from users table
-        users_array = DB.execute("SELECT * FROM users") 
+        cur.execute("SELECT * FROM users")
+        users_array = cur.fetchall()
 
         # visibility
         print(users_array)
