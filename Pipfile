@@ -9,6 +9,7 @@ flask = "*"
 seleniumbase = "*"
 faker = "*"
 gunicorn = "*"
+psycopg2 = "*"
 
 [dev-packages]
 
