@@ -1,5 +1,6 @@
 from makerscamp.db import *
-from makerscamp.classes.users import Users
+from makerscamp.classes.users import User
+from makerscamp import create_app
 
 class TestUsers():
     """Testing for the Users class"""
@@ -7,21 +8,16 @@ class TestUsers():
     def test_create_user(self):
         """confirm a user is entered into the database"""
 
-        # create a db
-        db = get_db()
-        cur = db.cursor()
-
         # send user's information to DB ( no instance )
         username = "Joe Bloggs"
-        Users.create(username)
+        User.create(username)
 
         # get all results from users table
-        cur.execute("SELECT * FROM users")
-        users_array = cur.fetchall()
+        users_store = db_conn.exec("SELECT * FROM users")
 
         # visibility
-        print(users_array)
-        assert username in users_array
+        print(users_store)
+        assert username in users_store
 
 #    def test_find_user():
 #        """a user can be retrieved from the database by username"""
@@ -35,7 +31,7 @@ class TestUsers():
 #        
 #
 #    def test_find_by_id():
-#        """a user can be retrieved from the database"""
+#        """a user can be retrieved from the database by pk_id"""
 #
 #    def test_find_all():
 #        """all users can be retrieved from the database"""
