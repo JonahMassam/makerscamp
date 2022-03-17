@@ -28,9 +28,6 @@ def create_app(test_config=None):
         return 'Hello, World!'
 
     
-    #@app.route('/')
-    #def home():
-    #    return 'Hi, World!'
 
     @app.route('/test')
     def test():
@@ -38,6 +35,9 @@ def create_app(test_config=None):
 
     from . import db
     db.init_app(app)
+
+    from .controllers import auth
+    app.register_blueprint(auth.bp)
 
     from . import index
     app.register_blueprint(index.bp)

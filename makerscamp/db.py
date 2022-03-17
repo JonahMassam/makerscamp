@@ -47,9 +47,7 @@ class DB:
     with db.cursor() as cur:
       cur.execute(command)
       db.commit()
-      if "SELECT username" in command:
-        return cur.fetchone()
-      elif "SELECT" in command:
+      if "SELECT" in command:
         return cur.fetchall()
       else:
         return
