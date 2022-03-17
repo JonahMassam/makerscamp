@@ -33,13 +33,13 @@ def create_app(test_config=None):
     def test():
         return 'Hi, Test!'
 
-    from . import db
+    from .classes import db
     db.init_app(app)
 
     from .controllers import auth
     app.register_blueprint(auth.bp)
 
-    from . import index
+    from .controllers import index
     app.register_blueprint(index.bp)
     app.add_url_rule('/', endpoint='home')
 

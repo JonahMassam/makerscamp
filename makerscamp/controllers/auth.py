@@ -5,7 +5,7 @@ from flask import (
 )
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from makerscamp.db import DB
+from makerscamp.classes.db import DB
 from makerscamp.classes.user import User
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')

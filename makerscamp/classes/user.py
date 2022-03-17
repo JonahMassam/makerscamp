@@ -1,4 +1,4 @@
-from makerscamp.db import *
+from makerscamp.classes.db import *
 from werkzeug.security import check_password_hash  #generate_password_hash
 
 db_conn = DB
@@ -27,8 +27,6 @@ class User():
             return User(user[0][1], user[0][2], user[0][0])
         else:
             return None
-
-
 
     def __init__(self, username, password, id):
         self.username = username
