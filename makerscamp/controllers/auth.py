@@ -6,6 +6,7 @@ from flask import (
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from makerscamp.db import DB
+from makerscamp.classes.user import User
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
@@ -22,13 +23,13 @@ def register():
             error = 'Username is required.'
         elif not password:
             error = 'Password is required.'
-        #elif User.find(username) is not None:
-        #    error = f"User {username} is already registered."
+        elif User.find(username) is not None:
+            error = f"User {username} is already registered."
         elif password != password_confirmation:
             error = "Both passwords do not match!"
 
         if error is None:
-           #User.create(username, password)
+            User.create(username, password)
             return redirect(url_for('auth.login'))
 
         flash(error)
@@ -42,7 +43,7 @@ def login():
         password = request.form['password']
 
         error = None
-        user=None# = User.find(username)
+        user = User.find(username)
 
         if user is None:
             error = 'Incorrect username.'
@@ -59,13 +60,13 @@ def login():
     return render_template('auth/login.html')
 
 
-# @bp.before_app_request
-# def load_logged_in_user():
-#     user_id = session.get('user_id')
-#     if user_id is None:
-#         g.user = None
-#     else:
-#         g.user = User.find_by_id(user_id)
+@bp.before_app_request
+def load_logged_in_user():
+    user_id = session.get('user_id')
+    if user_id is None:
+        g.user = None
+    else:
+        g.user = User.find_by_id(user_id)
 
 @bp.route('/logout')
 def logout():
