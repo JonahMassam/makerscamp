@@ -4,6 +4,8 @@
 
 {% block content %}
   {% if g.user %}
-    testing
+    {% for channel in users_channels %}
+      <a class="action" href="{{ url_for('index.home') }}">Test</a>
+    {% endfor %}
   {% endif %}
 {% endblock %}

@@ -31,8 +31,6 @@ def test_users():
     result= DB.exec("SELECT * FROM users")
     print(result)
 
-    #User.create("John")
-
     return render_template('home.html')
 
 @bp.route('/channels', methods=('GET', 'POST'))
@@ -41,4 +39,4 @@ def channels():
     print(g.user.id)
     user_channels = g.user.channels()
     print(user_channels)
-    return render_template('channels.html')
+    return render_template('channels.html', user_channels=user_channels)

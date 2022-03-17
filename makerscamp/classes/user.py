@@ -40,9 +40,10 @@ class User():
         return self.password == password
 
     def channels(self):
-        channels = DB.exec(
+        user_channels = DB.exec(
             f"SELECT * FROM user_channels WHERE user_id={self.id}"
         )
-        return [Channel(channel[0][0], channel[0][1]) for channel in channels]
+        print(user_channels)
+        return [Channel(channel[0], channel[1]) for channel in user_channels]
 
 
