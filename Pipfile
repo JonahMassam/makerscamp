@@ -1,4 +1,3 @@
-
 [[source]]
 url = "https://pypi.org/simple"
 verify_ssl = true
@@ -9,9 +8,10 @@ flask = "*"
 seleniumbase = "*"
 faker = "*"
 gunicorn = "*"
+setuptools = "*"
 psycopg2 = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.10.2"
+python_version = "3.9.10"

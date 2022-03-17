@@ -4,7 +4,7 @@ from flask import (
 )
 from werkzeug.exceptions import abort
 from makerscamp.db import DB
-
+from makerscamp.classes.users import User
 
 bp = Blueprint('index', __name__)
 
@@ -23,3 +23,14 @@ def home():
 def jonah_test():
     print("hi")
     return redirect(url_for("index.home"))
+
+@bp.route('/test_users')
+def test_users():
+    result= DB.exec("SELECT * FROM users")
+    print(result)
+
+    User.create("John")
+
+    return render_template('home.html')
+
+
