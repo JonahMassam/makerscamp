@@ -4,7 +4,7 @@ from flask import (
 )
 from werkzeug.exceptions import abort
 from makerscamp.db import DB
-from makerscamp.classes.users import User
+from makerscamp.classes.user import User
 
 bp = Blueprint('index', __name__)
 
@@ -29,7 +29,7 @@ def test_users():
     result= DB.exec("SELECT * FROM users")
     print(result)
 
-    User.create("John")
+    #User.create("John")
 
     return render_template('home.html')
 
