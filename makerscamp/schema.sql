@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS channels;
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     username text NOT NULL,
-    password TEXT NOT NULL
+    password text NOT NULL
 );
 
 CREATE TABLE channels (

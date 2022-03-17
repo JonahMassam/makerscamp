@@ -1,5 +1,5 @@
 from makerscamp.db import *
-from makerscamp.classes.users import User
+from makerscamp.classes.user import User
 from makerscamp import create_app
 
 class TestUsers():
