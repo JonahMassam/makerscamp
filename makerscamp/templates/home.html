@@ -4,6 +4,6 @@
 
 {% block content %}
   {% if g.user %}
-    testing
+  <li><a href="{{ url_for('index.channels') }}">Channels</a>
   {% endif %}
 {% endblock %}

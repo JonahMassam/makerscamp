@@ -6,6 +6,7 @@ from werkzeug.exceptions import abort
 from makerscamp.classes.db import DB
 from makerscamp.classes.user import User
 from makerscamp.controllers.auth import login_required
+from makerscamp.classes.channel import Channel
 
 bp = Blueprint('index', __name__)
 
@@ -34,7 +35,10 @@ def test_users():
 
     return render_template('home.html')
 
-@bp.route('/<int::id>/channels', methods=('GET', 'POST'))
+@bp.route('/channels', methods=('GET', 'POST'))
 @login_required
 def channels():
-    pass
+    print(g.user.id)
+    user_channels = g.user.channels()
+    print(user_channels)
+    return render_template('channels.html')

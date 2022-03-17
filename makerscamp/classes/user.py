@@ -1,5 +1,7 @@
 from makerscamp.classes.db import *
+from makerscamp.classes.channel import Channel
 from werkzeug.security import check_password_hash  #generate_password_hash
+
 
 db_conn = DB
 
@@ -36,5 +38,11 @@ class User():
     def authenticate(self, password):
         #return check_password_hash(self.password, password)
         return self.password == password
+
+    def channels(self):
+        channels = DB.exec(
+            f"SELECT * FROM user_channels WHERE user_id={self.id}"
+        )
+        return [Channel(channel[0][0], channel[0][1]) for channel in channels]
 
 

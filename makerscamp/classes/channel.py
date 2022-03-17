@@ -15,12 +15,13 @@ class Channel:
       return Channel(channel[0][0], channel[0][1])
 
   @classmethod
-  def fund_by_id(id):
+  def find_by_id(id):
     channel = DB.exec(
       f"SELECT * FROM channels WHERE name = '{id}'"
     )
     if channel:
       return Channel(channel[0][0], channel[0][1])
+    
 
   def __init__(self, id, name):
       self.id = id
