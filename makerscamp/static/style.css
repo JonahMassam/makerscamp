@@ -1,0 +1,190 @@
+html {
+  font-family: sans-serif;
+  background: rgb(51, 51, 51);
+  padding: 1rem;
+}
+
+body {
+  max-width: 960px;
+  margin: 0 auto;
+  background: rgb(70, 70, 70);
+}
+
+h1 {
+  font-family: serif;
+  color: #c25e00;
+  margin: 1rem 0;
+}
+
+a {
+  color: #c25e00;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid rgb(70, 70, 70);
+}
+
+nav {
+  background: rgb(41, 41, 41);
+  display: flex;
+  align-items: center;
+  padding: 0 0.5rem;
+}
+
+nav h1 {
+  flex: auto;
+  margin: 0;
+}
+
+nav h1 a {
+  text-decoration: none;
+  padding: 0.25rem 0.5rem;
+}
+
+nav ul  {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li a, nav ul li span, header .action {
+  display: block;
+  padding: 0.5rem;
+}
+
+.content {
+  padding: 0 1rem 1rem;
+}
+
+.content > header {
+  border-bottom: 1px solid #ffffff;
+  display: flex;
+  align-items: flex-end;
+}
+
+.content > header h1 {
+  flex: auto;
+  margin: 1rem 0 0.25rem 0;
+}
+
+.flash {
+  margin: 1em 0;
+  padding: 1em;
+  background: #7a7a7a;
+  border: 1px solid #c25e00;
+}
+
+.post > header {
+  background: rgb(51, 51, 51);
+  color: #c25e00;
+  display: flex;
+  align-items: flex-end;
+  font-size: 0.85em;
+}
+
+.post > header > div:first-of-type {
+  flex: auto;
+}
+
+.post > header h1 {
+  font-size: 1.5em;
+  margin-bottom: 0;
+}
+
+.post .footer {
+  display: flex;
+  align-items: flex-end;
+  font-size: 0.85em;
+}
+
+.post .about {
+  color: rgb(255, 255, 255);
+  font-style: italic;
+}
+
+.post .body {
+  color: rgb(255, 255, 255);
+  font-style: italic;
+  white-space: pre-line;
+}
+
+.content:last-child {
+  margin-bottom: 0;
+}
+
+.content form {
+  color: rgb(255, 255, 255);
+  font-style: italic;
+  margin: 1em 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.content label {
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+
+.content input, .content textarea {
+  background: rgb(51, 51, 51);
+  color: rgb(255, 255, 255);
+  font-style: italic;
+  margin-bottom: 1em;
+}
+
+.content textarea {
+  color: rgb(255, 255, 255);
+  font-style: italic;
+  min-height: 12em;
+  resize: vertical;
+}
+
+input.danger {
+  color: #cc2f2e;
+}
+
+input[type=submit] {
+  color: #c25e00;
+  font-style: italic;
+  align-self: start;
+  min-width: 10em;
+}
+
+.profile_picture {
+  float: left;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border: 1px solid black;
+  border-radius: 50%;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+.profile_page_picture {
+  width: 200px;
+  height: auto;
+  border: 1px solid black;
+  border-radius: 3px;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+
+.post_photo {
+  background: rgb(51, 51, 51);
+  width: 150px;
+  height: auto;
+  margin-right: 10px;
+  margin-top: 5px;
+}
+
+.post .comment {
+  color: rgb(255, 255, 255);
+  font-style: italic;
+}
+
+body .about {
+  color: rgb(255, 255, 255);
+  font-style: italic;
+}

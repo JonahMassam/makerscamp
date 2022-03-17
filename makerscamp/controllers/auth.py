@@ -9,6 +9,31 @@ from makerscamp.db import DB
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 
+@bp.route('/register', methods=('GET', 'POST'))
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        password_confirmation = request.form['password_confirmation']
+
+        error = None
+
+        if not username:
+            error = 'Username is required.'
+        elif not password:
+            error = 'Password is required.'
+        #elif User.find(username) is not None:
+        #    error = f"User {username} is already registered."
+        elif password != password_confirmation:
+            error = "Both passwords do not match!"
+
+        if error is None:
+           #User.create(username, password)
+            return redirect(url_for('auth.login'))
+
+        flash(error)
+
+    return render_template('auth/register.html')
 
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
