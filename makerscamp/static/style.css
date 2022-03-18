@@ -188,3 +188,16 @@ body .about {
   color: rgb(255, 255, 255);
   font-style: italic;
 }
+
+.flex-container {
+  display: flex;
+}
+
+.flex-child {
+  flex: 1;
+  border: 2px solid yellow;
+}  
+
+.flex-child:first-child {
+  margin-right: 10px;
+} 

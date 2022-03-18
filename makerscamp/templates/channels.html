@@ -3,9 +3,20 @@
 <h1>{% block title %}Channles{% endblock %}</h1>
 
 {% block content %}
-  {% if g.user %}
-    {% for channel in chs %}
+  <div class="flex-container">
+
+    <div class="flex-child magenta">
+      <h1>Channels:</h1>
+      {% for channel in chs %}
       <a class="action" href="{{ url_for('index.home') }}">{{channel.name}}</a><br>
-    {% endfor %}
-  {% endif %}
+      {% endfor %}
+    </div>
+    
+    <div class="flex-child green">
+      <h1>Messages:</h1>
+    </div>
+    
+  </div>
+
 {% endblock %}
+
