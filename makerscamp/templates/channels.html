@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+<h1>{% block title %}Channles{% endblock %}</h1>
+
+{% block content %}
+  {% if g.user %}
+    {% for channel in chs %}
+      <a class="action" href="{{ url_for('index.home') }}">{{channel.name}}</a><br>
+    {% endfor %}
+  {% endif %}
+{% endblock %}

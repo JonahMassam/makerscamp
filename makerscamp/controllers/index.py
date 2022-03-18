@@ -3,8 +3,10 @@ from flask import (
     Blueprint, flash, g, redirect, render_template, request, url_for, session
 )
 from werkzeug.exceptions import abort
-from makerscamp.db import DB
+from makerscamp.classes.db import DB
 from makerscamp.classes.user import User
+from makerscamp.controllers.auth import login_required
+from makerscamp.classes.channel import Channel
 
 bp = Blueprint('index', __name__)
 
@@ -29,8 +31,10 @@ def test_users():
     result= DB.exec("SELECT * FROM users")
     print(result)
 
-    #User.create("John")
-
     return render_template('home.html')
 
-
+@bp.route('/channels', methods=('GET', 'POST'))
+@login_required
+def channels():
+    user_channels = g.user.channels()
+    return render_template('channels.html', chs=user_channels)

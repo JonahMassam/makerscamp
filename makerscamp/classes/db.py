@@ -50,4 +50,4 @@ class DB:
       if "SELECT" in command:
         return cur.fetchall()
       else:
-        return
+        return None

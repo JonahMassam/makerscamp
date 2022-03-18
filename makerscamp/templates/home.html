@@ -1,3 +1,9 @@
 {% extends 'base.html' %}
 
 <h1>{% block title %}Home{% endblock %}</h1>
+
+{% block content %}
+  {% if g.user %}
+  <li><a href="{{ url_for('index.channels') }}">Channels</a>
+  {% endif %}
+{% endblock %}
