@@ -1,19 +1,25 @@
 {% extends 'base.html' %}
 
 <h1>{% block title %}Channles{% endblock %}</h1>
+<br>
+<a class="action" href="{{ url_for('index.new_channel') }}">New Channel</a><br>
+<br>
 
 {% block content %}
   <div class="flex-container">
 
     <div class="flex-child magenta">
-      <h1>Channels:</h1>
+      <h1>Channels: <a class="action" href="{{ url_for('index.new_channel') }}">New Channel</a><br></h1>
       {% for channel in chs %}
-      <a class="action" href="{{ url_for('index.home') }}">{{channel.name}}</a><br>
+        <a class="action" href="{{ url_for('index.channels', channel_id=channel.id) }}">{{channel.name}}</a><br>
       {% endfor %}
     </div>
     
     <div class="flex-child green">
       <h1>Messages:</h1>
+      {% if channel_id != 0 %}
+        Select a channel
+      {% endif %}
     </div>
     
   </div>
