@@ -36,7 +36,5 @@ def test_users():
 @bp.route('/channels', methods=('GET', 'POST'))
 @login_required
 def channels():
-    print(g.user.id)
     user_channels = g.user.channels()
-    print(user_channels)
-    return render_template('channels.html', user_channels=user_channels)
+    return render_template('channels.html', chs=user_channels)
