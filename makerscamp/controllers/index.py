@@ -7,6 +7,7 @@ from makerscamp.classes.db import DB
 from makerscamp.classes.user import User
 from makerscamp.controllers.auth import login_required
 from makerscamp.classes.channel import Channel
+from makerscamp.classes.message import Message
 
 bp = Blueprint('index', __name__)
 
@@ -55,3 +56,9 @@ def new_channel():
             user_channels = g.user.channels()
             return render_template('channels.html', chs=user_channels, channel_id=new_ch.id)
     return render_template('new_channel.html')
+    #return render_template('channels.html', chs=user_channels)
+
+@bp.route('/test-message', methods=('GET', 'POST'))
+def receive_message():
+    messages = Message.all()
+    return render_template('test-message.html', messages = messages)
