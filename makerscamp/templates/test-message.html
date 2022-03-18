@@ -7,12 +7,13 @@
     <title>test messages</title>
 </head>
 <body>
-    <h1>Testing Message classes</h1>
+    <h1>Testing BOOOOO Message classes</h1>
     {% for message in messages %}
-        {{ message.id }}
+        {{ message.pk_id }}
         {{ message.user_id }}
+        {{ message.message }}
         {{ message.channel_id }}
-        {{ message.timestamp }}
+        <!-- {{ message.timestamp }} -->
     {% endfor %}    
 </body>
 </html>
