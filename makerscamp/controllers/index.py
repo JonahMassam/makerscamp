@@ -13,11 +13,6 @@ bp = Blueprint('index', __name__)
 
 @bp.route('/')
 def home():
-    #result= DB.exec("SELECT * FROM users")
-    #print(result)
-    #DB.exec("INSERT INTO channels(name) VALUES('testing32411342')")
-    #result3 = DB.exec("SELECT * FROM channels")
-    #print(result3)
     print("on index")
     return render_template('home.html')
 
@@ -34,11 +29,38 @@ def test_users():
 
     return render_template('home.html')
 
-@bp.route('/channels', methods=('GET', 'POST'))
+@bp.route('/<int:channel_id>/channels', methods=('GET', 'POST'))
 @login_required
-def channels():
+def channels(channel_id):
     user_channels = g.user.channels()
-    return render_template('channels.html', chs=user_channels)
+    messages = Channel.get_messages(channel_id)
+    users = {user[0]:user[1] for user in DB.exec("SELECT id,username from users")}
+    print(users)
+    print(messages)
+    output_messages = []
+    for message in messages:
+        output_messages.append( (users[message[1]], message[2]) )
+    return render_template('channels.html', chs=user_channels, channel_id=channel_id, messages=output_messages)
+
+
+@bp.route('/new_channel', methods=('GET', 'POST'))
+@login_required
+def new_channel():
+    if request.method == 'POST':
+        channel_name = request.form['name']
+        error = None
+        if not channel_name:
+            error = 'Name is required'
+        if error is not None:
+            flash(error)
+        else:
+            Channel.create(channel_name)
+            new_ch = Channel.find(channel_name)
+            new_ch.add_user(g.user.id)
+            user_channels = g.user.channels()
+            return render_template('channels.html', chs=user_channels, channel_id=new_ch.id)
+    return render_template('new_channel.html')
+    #return render_template('channels.html', chs=user_channels)
 
 @bp.route('/test-message', methods=('GET', 'POST'))
 def receive_message():

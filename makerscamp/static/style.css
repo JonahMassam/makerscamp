@@ -188,3 +188,23 @@ body .about {
   color: rgb(255, 255, 255);
   font-style: italic;
 }
+
+.flex-container {
+  display: flex;
+}
+
+.flex-child {
+  flex: 1;
+  border: 2px solid yellow;
+}  
+
+.flex-child:first-child {
+  margin-right: 10px;
+} 
+
+.message_scroll {
+  height:300px;
+  width:300px;
+  border:1px solid #ccc;
+  font:16px/26px Georgia, Garamond, Serif;overflow:auto;
+}

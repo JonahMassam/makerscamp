@@ -4,10 +4,10 @@ class Channel:
   
   @classmethod
   def create(cls, name):
-    DB.exec(f"INSERT IN channels (name) VALUES ('{name}') ")
+    DB.exec(f"INSERT INTO channels (name) VALUES ('{name}') ")
 
   @classmethod
-  def find(name):
+  def find(cls, name):
     channel = DB.exec(
       f"SELECT * FROM channels WHERE name = '{name}'"
     )
@@ -15,13 +15,16 @@ class Channel:
       return Channel(channel[0][0], channel[0][1])
 
   @classmethod
-  def find_by_id(id):
+  def find_by_id(cls, id):
     channel = DB.exec(
       f"SELECT * FROM channels WHERE name = '{id}'"
     )
     if channel:
       return Channel(channel[0][0], channel[0][1])
-    
+
+  @classmethod
+  def get_messages(cls, id):
+    return DB.exec(f"SELECT * FROM messages WHERE channel_id={id}")
 
   def __init__(self, id, name):
       self.id = id
@@ -39,7 +42,4 @@ class Channel:
     )
 
   def add_message():
-    pass
-
-  def get_messages():
     pass
