@@ -35,8 +35,6 @@ def channels(channel_id):
     user_channels = g.user.channels()
     messages = Channel.get_messages(channel_id)
     users = {user[0]:user[1] for user in DB.exec("SELECT id,username from users")}
-    print(users)
-    print(messages)
     output_messages = []
     for message in messages:
         output_messages.append( (users[message[1]], message[2]) )
@@ -66,3 +64,14 @@ def new_channel():
 def receive_message():
     messages = Message.all()
     return render_template('test-message.html', messages = messages)
+
+
+@bp.route('/post_message', methods=('GET', 'POST'))
+@login_required
+def post_new_message():
+    print("hi")
+    if request.method == 'POST':
+        message = request.form['message']
+        channel_id = request.form['channel_id']
+        Message.create(g.user.id, channel_id, message)
+    return redirect( url_for("index.channels", channel_id=channel_id) )
