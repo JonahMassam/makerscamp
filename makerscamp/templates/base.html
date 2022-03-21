@@ -1,15 +1,19 @@
 <!doctype html>
 <title>{% block title %}{% endblock %} - MakersCamp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <nav>
-  <h1><a href="{{ url_for('index.home') }}">MakersCamp</a></h1>
+  <h1><a href="{{ url_for('index.home') }}"><img src="../static/images/makerscamp.jpg"></a></h1>
   <ul>
     {% if g.user %}
-      <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
+      <li><a href="{{ url_for('auth.logout') }}">LOG OUT
+        
+      </a>
     {% else %}
-      <li><a href="{{ url_for('index.home') }}">&#127968;</a>
-      <li><a href="{{ url_for('auth.register') }}">Register</a>
-      <li><a href="{{ url_for('auth.login') }}">Log In</a>
+      <li><a href="{{ url_for('auth.register') }}">REGISTER</a>
+      <li><a href="{{ url_for('auth.login') }}">LOG IN</a>
     {% endif %}
   </ul>
 </nav>
