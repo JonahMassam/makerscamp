@@ -28,6 +28,11 @@
           {% endfor %}
         {% endif %}
       </div>
+      <form action="/post_message" method="post">
+        <input type="hidden" name="channel_id" value={{channel_id}}>
+        <input type="text" name="message">
+        <input type="submit">
+      </form>
     </div>
     
   </div>
