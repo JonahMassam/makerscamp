@@ -24,7 +24,7 @@ class Channel:
 
   @classmethod
   def get_messages(cls, id):
-    pass
+    return DB.exec(f"SELECT * FROM messages WHERE channel_id={id}")
 
   def __init__(self, id, name):
       self.id = id

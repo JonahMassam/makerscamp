@@ -34,15 +34,19 @@ def test_users():
 def channels(channel_id):
     user_channels = g.user.channels()
     messages = Channel.get_messages(channel_id)
-    return render_template('channels.html', chs=user_channels, channel_id=channel_id)
+    users = {user[0]:user[1] for user in DB.exec("SELECT id,username from users")}
+    print(users)
+    print(messages)
+    output_messages = []
+    for message in messages:
+        output_messages.append( (users[message[1]], message[2]) )
+    return render_template('channels.html', chs=user_channels, channel_id=channel_id, messages=output_messages)
 
 
 @bp.route('/new_channel', methods=('GET', 'POST'))
 @login_required
 def new_channel():
-    print(request.method)
     if request.method == 'POST':
-        print("hi")
         channel_name = request.form['name']
         error = None
         if not channel_name:

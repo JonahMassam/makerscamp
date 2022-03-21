@@ -45,7 +45,7 @@ class User():
         )
         chs = []
         for channel in user_channels:
-            chs.append(DB.exec(f"SELECT * FROM channels WHERE id={channel[0]}")[0])
+            chs.append(DB.exec(f"SELECT * FROM channels WHERE id={channel[2]}")[0])
         return [Channel(channel[0], channel[1]) for channel in chs]
 
 

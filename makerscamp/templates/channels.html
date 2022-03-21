@@ -17,9 +17,17 @@
     
     <div class="flex-child green">
       <h1>Messages:</h1>
-      {% if channel_id != 0 %}
-        Select a channel
-      {% endif %}
+      <div class="message_scroll">
+        {% if channel_id == 0 %}
+          Select a channel
+        {% else %}
+          {% for message in messages %}
+            {{ message[0] }}:<br>
+            {{ message[1] }}<br>
+            <br>
+          {% endfor %}
+        {% endif %}
+      </div>
     </div>
     
   </div>
