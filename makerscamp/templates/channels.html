@@ -1,15 +1,14 @@
 {% extends 'base.html' %}
 
 <h1>{% block title %}Channles{% endblock %}</h1>
-<br>
-<a class="action" href="{{ url_for('index.new_channel') }}">New Channel</a><br>
-<br>
+
 
 {% block content %}
   <div class="flex-container">
 
     <div class="flex-child magenta">
-      <h1>Channels: <a class="action" href="{{ url_for('index.new_channel') }}">New Channel</a><br></h1>
+      <h1>Channels: <br>
+      <a class="action" href="{{ url_for('index.new_channel') }}">New Channel</a><br></h1>
       <form action="/join_channel" method="post">
         Join a room:
         <select name="channel_id">
@@ -37,11 +36,13 @@
           {% endfor %}
         {% endif %}
       </div>
-      <form action="/post_message" method="post">
-        <input type="hidden" name="channel_id" value={{channel_id}}>
-        <input type="text" name="message">
-        <input type="submit">
-      </form>
+      {% if channel_id != 0 %}
+        <form action="/post_message" method="post">
+          <input type="hidden" name="channel_id" value={{channel_id}}>
+          <input type="text" name="message">
+          <input type="submit">
+        </form>
+      {% endif %}
     </div>
     
   </div>
