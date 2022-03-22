@@ -42,6 +42,9 @@ class DB:
   def test():
     return "hi"
 
+  def sanitize(message):
+    return message.replace("'", "''") 
+
   def exec(command):
     db = get_db()
     with db.cursor() as cur:
