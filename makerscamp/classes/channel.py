@@ -4,12 +4,12 @@ class Channel:
   
   @classmethod
   def create(cls, name):
-    DB.exec(f"INSERT INTO channels (name) VALUES ('{name}') ")
+    DB.exec(f"INSERT INTO channels (name) VALUES ('{DB.sanitize(name)}') ")
 
   @classmethod
   def find(cls, name):
     channel = DB.exec(
-      f"SELECT * FROM channels WHERE name = '{name}'"
+      f"SELECT * FROM channels WHERE name = '{DB.sanitize(name)}'"
     )
     if channel:
       return Channel(channel[0][0], channel[0][1])
