@@ -11,12 +11,12 @@ class User():
     @classmethod
     def create(cls, username, password):
         db_conn.exec(
-            f"INSERT INTO users (username, password) VALUES ('{username}', '{password}')")
+            f"INSERT INTO users (username, password) VALUES ('{db_conn.sanitize(username)}', '{db_conn.sanitize(password)}')")
 
     @classmethod
     def find(cls, username):
         user = db_conn.exec(
-            f"SELECT * FROM users WHERE username = ('{username}')")
+            f"SELECT * FROM users WHERE username = ('{db_conn.sanitize(username)}')")
         if user:
             return User(user[0][1], user[0][2], user[0][0])
         else:
