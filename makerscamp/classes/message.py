@@ -14,8 +14,7 @@ class Message():
     def create(cls, user_id, channel_id, message):
         """send from html form, through route, to sql"""
         db_conn.exec(
-            f"INSERT INTO messages (user_id, channel_id, message) VALUES ('{user_id}', '{channel_id}', '{message}')")
-
+            f"INSERT INTO messages (user_id, channel_id, message) VALUES ('{user_id}', '{channel_id}', '{db_conn.sanitize(message)}')")
     
     @classmethod
     def all(cls):

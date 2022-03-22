@@ -38,7 +38,8 @@ def channels(channel_id):
     output_messages = []
     for message in messages:
         output_messages.append( (users[message[1]], message[2]) )
-    return render_template('channels.html', chs=user_channels, channel_id=channel_id, messages=output_messages)
+    all_channels = Channel.all()
+    return render_template('channels.html', chs=user_channels, channel_id=channel_id, messages=output_messages, all_channels=all_channels)
 
 
 @bp.route('/new_channel', methods=('GET', 'POST'))
@@ -60,10 +61,10 @@ def new_channel():
     return render_template('new_channel.html')
     #return render_template('channels.html', chs=user_channels)
 
-@bp.route('/test-message', methods=('GET', 'POST'))
+@bp.route('/test_message', methods=('GET', 'POST'))
 def receive_message():
     messages = Message.all()
-    return render_template('test-message.html', messages = messages)
+    return render_template('test_message.html', messages = messages)
 
 
 @bp.route('/post_message', methods=('GET', 'POST'))
@@ -75,3 +76,14 @@ def post_new_message():
         channel_id = request.form['channel_id']
         Message.create(g.user.id, channel_id, message)
     return redirect( url_for("index.channels", channel_id=channel_id) )
+
+@bp.route('/join_channel', methods=('GET', 'POST'))
+@login_required
+def join_channel():
+    channel_id = request.form['channel_id']
+    result = DB.exec(f"SELECT * FROM user_channels WHERE user_id={g.user.id} AND channel_id={channel_id}")
+    print(result)
+    if not result:
+        DB.exec(f"INSERT INTO user_channels(user_id, channel_id) VALUES({g.user.id}, {channel_id})")
+        return redirect( url_for("index.channels", channel_id=channel_id) )
+    return redirect( url_for("index.channels", channel_id=0) )
