@@ -1,13 +1,15 @@
 html {
   font-family: 'Roboto', sans-serif;
-  background: rgb(51, 51, 51);
+  background-color: #DAB88B;
+  background-image: linear-gradient(43deg, #DAB88B 0%, #F3E9DD 46%, #DAB88B 100%);
+  background-repeat: no-repeat;
   padding: 1rem;
 }
 
 body {
   max-width: 1060px;
   margin: 0 auto;
-  background: rgb(70, 70, 70);
+  background: #eec58f;
 }
 
 h1 {
@@ -35,7 +37,7 @@ hr {
 }
 
 nav {
-  background: rgb(41, 41, 41);
+  background:#4b3314 ;
   display: flex;
   align-items: center;
   padding: 0 0.5rem;
@@ -134,17 +136,21 @@ nav ul li a, nav ul li span, header .action {
 .content label {
   font-weight: bold;
   margin-bottom: 0.5em;
+  color:#c25e00;
 }
 
 .content input, .content textarea {
-  background: rgb(51, 51, 51);
-  color: rgb(255, 255, 255);
-  font-style: italic;
+  background:#DAB88B;
+  color: #c25e00;
+  font-style: bold;
+  font-size: 17px;
   margin-bottom: 1em;
+  border: 2px solid #c25e00;
+  height: 30px;
 }
 
 .content textarea {
-  color: rgb(255, 255, 255);
+  color: #cc2f2e;
   font-style: italic;
   min-height: 12em;
   resize: vertical;
@@ -156,9 +162,11 @@ input.danger {
 
 input[type=submit] {
   color: #c25e00;
-  font-style: italic;
   align-self: start;
   min-width: 10em;
+  border-radius: 20px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
 }
 
 .profile_picture {
@@ -203,19 +211,33 @@ body .about {
 }
 
 .flex-child {
-  flex: 1;
   border: 2px solid white;
 }  
 
 .flex-child:first-child {
   margin-right: 10px;
+  width: 30%;
+  background-color: #dd4b4872;
 } 
 
+.flex-child.green{
+  width: 70%;
+}
+
+
+
+
+
 .message_scroll {
-  height:300px;
-  width:450px;
+  height:auto;
+  width:90%; 
+  font-family:'Roboto', sans-serif ;
+  background-color: #cc2f2e;
+  margin-left: 10px;
+  padding: 5px 10px;
   border:1px solid #ccc;
-  font:16px/26px Georgia, Garamond, Serif;
+  border-radius: 20px;
+  font-family:'Roboto', sans-serif ;
   overflow:auto;
   display: flex;
   flex-direction: column-reverse;
