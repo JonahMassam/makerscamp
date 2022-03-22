@@ -26,6 +26,10 @@ class Channel:
   def get_messages(cls, id):
     return DB.exec(f"SELECT * FROM messages WHERE channel_id={id}")
 
+  @classmethod
+  def all(cls):
+    return [ Channel(ch[0], ch[1]) for ch in DB.exec("SELECT * FROM channels")]
+
   def __init__(self, id, name):
       self.id = id
       self.name = name
