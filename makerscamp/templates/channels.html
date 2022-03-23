@@ -41,12 +41,18 @@
         {% if channel_id == 0 %}
           Select a channel
         {% else %}
-          {% for message in messages %}
-            {{ message[0] }}:<br>
-            {{ message[1] }}<br>
+          
+            {% for message in messages %}
             <br>
-          {% endfor %}
-        {% endif %}
+        
+                {{ message[1] }}
+                {{ message[0] }}
+              
+              <hr>
+            {% endfor %}
+          
+             {% endif %}
+        
       </div>
       {% if channel_id != 0 %}
         <form action="/post_message" method="post">
