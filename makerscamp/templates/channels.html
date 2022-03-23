@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+
 <h1>{% block title %}Channles{% endblock %}</h1>
 
 
@@ -29,23 +30,64 @@
         {% if channel_id == 0 %}
           Select a channel
         {% else %}
+          <ul id="message_list">
           {% for message in messages %}
-            {{ message[0] }}:<br>
-            {{ message[1] }}<br>
+            <li>{{ message[0] }}:</li>
+            <li>{{ message[1] }}:</li>
             <br>
           {% endfor %}
+          </ul>
         {% endif %}
       </div>
       {% if channel_id != 0 %}
-        <form action="/post_message" method="post">
+        <form name="new_message" action="/post_message" method="post">
           <input type="hidden" name="channel_id" value={{channel_id}}>
-          <input type="text" name="message">
-          <input type="submit">
+          <input id="myText" type="text" name="message">
+          <input type="submit" onclick="post_new_message()">
         </form>
       {% endif %}
+      <form>
+        <input type="submit" onclick="post_new_message()">
+        <button id="click-me" type="button" onclick="post_new_message()"> Hi </button>
+        
+      </form>
     </div>
     
   </div>
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+  <script type="text/javascript" charset="utf-8">
+
+    $('#submit').click(function(event) {
+      event.preventDefault();
+      getCitations();
+    });
+
+    var socket = io.connect('http://127.0.0.1:5000');
+
+    socket.on('connect', function() {
+        socket.emit('message', {data: 'I\'m connected!'});
+    });
+    
+    function post_new_message() {
+      socket.emit('new_message', {{channel_id}},'{{g.user.username}}' , document.getElementById("myText").value );
+    };
+
+
+    socket.on('get_message', function(data) {
+      console.log(data);
+      if (data["channel_id"] == {{channel_id}}) {
+        $('#message_list').append('<li>'+data["username"]+'</li>');
+        $('#message_list').append('<li>'+data["message"]+'</li>');
+      };
+
+    } );
+
+
+  </script>
+
 {% endblock %}
+
+
 

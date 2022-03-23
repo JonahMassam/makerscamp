@@ -2,12 +2,15 @@ from xmlrpc.client import Boolean
 from flask import (
     Blueprint, flash, g, redirect, render_template, request, url_for, session
 )
+
 from werkzeug.exceptions import abort
 from makerscamp.classes.db import DB
 from makerscamp.classes.user import User
 from makerscamp.controllers.auth import login_required
 from makerscamp.classes.channel import Channel
 from makerscamp.classes.message import Message
+from makerscamp import socketio
+from flask_socketio import emit
 
 bp = Blueprint('index', __name__)
 
@@ -70,7 +73,6 @@ def receive_message():
 @bp.route('/post_message', methods=('GET', 'POST'))
 @login_required
 def post_new_message():
-    print("hi")
     if request.method == 'POST':
         message = request.form['message']
         channel_id = request.form['channel_id']
@@ -87,3 +89,15 @@ def join_channel():
         DB.exec(f"INSERT INTO user_channels(user_id, channel_id) VALUES({g.user.id}, {channel_id})")
         return redirect( url_for("index.channels", channel_id=channel_id) )
     return redirect( url_for("index.channels", channel_id=0) )
+
+
+@socketio.on('message')
+def handle_message(data):
+    print('received message: ', " + ", data)
+
+
+@socketio.on('new_message')
+def new_message_posted(channel_id, username, message):
+    print(channel_id, " + ", message)
+    socketio.emit("get_message", {"channel_id":channel_id, "username":username, "message":message})
+
