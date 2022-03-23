@@ -5,3 +5,4 @@
 *.pyo
 *.lock
 .vscode/*
+geckodriver.log
