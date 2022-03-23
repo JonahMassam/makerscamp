@@ -3,5 +3,4 @@
 .flaskenv
 *.pyc
 *.pyo
-*.lock
 .vscode/*
