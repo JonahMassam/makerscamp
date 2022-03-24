@@ -234,7 +234,7 @@ body .about {
 } 
 
 .flex-child:first-child h1 a{
-  border-bottom: 2px solid #cc2f2e;
+  /* border-bottom: 2px solid #cc2f2e; */
   margin-top: 30px;
 }
 
@@ -283,7 +283,7 @@ body .about {
 
 
 .message_scroll {
-  height:400px;
+  height:450px;
   width:90%; 
   border:1px solid #ccc;
   overflow:auto;

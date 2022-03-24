@@ -61,7 +61,7 @@ def new_channel():
             new_ch = Channel.find(channel_name)
             new_ch.add_user(g.user.id)
             user_channels = g.user.channels()
-            return render_template('channels.html', chs=user_channels, channel_id=new_ch.id)
+            return redirect( url_for("index.channels", channel_id=new_ch.id) )
     return render_template('new_channel.html')
     #return render_template('channels.html', chs=user_channels)
 
@@ -87,14 +87,11 @@ def post_new_message():
 def join_channel():
     channel_id = request.form['channel_id']
     result = DB.exec(f"SELECT * FROM user_channels WHERE user_id={g.user.id} AND channel_id={channel_id}")
-    print(result)
-    #return render_template('channels.html', chs=g.user.channels(), channel_id=existing_channel.id)
     if not result:
         DB.exec(f"INSERT INTO user_channels(user_id, channel_id) VALUES({g.user.id}, {channel_id})")
         return redirect( url_for("index.channels", channel_id=channel_id) )
     else:
         return redirect( url_for('index.channels', channel_id=channel_id) )
-    return redirect( url_for("index.channels", channel_id=0) )
 
 
 @socketio.on('message')

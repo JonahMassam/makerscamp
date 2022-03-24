@@ -20,8 +20,10 @@
   <div class="flex-container">
 
     <div class="flex-child magenta">
-      <h1>Channels <br>
-      <button type="button" class="action" href="{{ url_for('index.new_channel') }}">New Channel</a><br></h1>
+      <h1>Channels</h1>
+      <a href="{{ url_for('index.new_channel') }}">
+        <button type="button">New Channel </button>
+      </a>
       <form action="/join_channel" method="post">
         Join an existing channel:
         <select name="channel_id">
