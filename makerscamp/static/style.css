@@ -65,6 +65,7 @@ nav ul li a, nav ul li span, header .action {
   padding: 0.5rem;
 }
 
+
 .content {
   padding: 0 1rem 1rem;
 }
@@ -162,6 +163,16 @@ input.danger {
 
 input[type=submit] {
   color: #c25e00;
+  align-self: start;
+  min-width: 10em;
+  border-radius: 20px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+}
+
+button {
+  color: #c25e00;
+  background-color: #7a5d38;
   align-self: start;
   min-width: 10em;
   border-radius: 20px;
