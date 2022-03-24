@@ -218,7 +218,53 @@ body .about {
   margin-right: 10px;
   width: 30%;
   background-color: #dd4b4872;
+  text-align: center;
+  
 } 
+
+.flex-child:first-child h1 a{
+  border-bottom: 2px solid #cc2f2e;
+  margin-top: 30px;
+}
+
+.flex-child:first-child input{
+  margin-left: 40px;
+}
+
+ .channel-list {
+  width: 100%;
+  list-style: none;
+}
+
+ .channel-list ul {
+  list-style: none;
+  width: 100%;
+
+}
+
+.channel-list li{
+  margin-left: -40px;
+  width: 100%;
+  border-top: 2px solid #cc2f2e;
+  border-bottom: 2px solid #cc2f2e;
+  padding: 5px 0;
+  margin-top: -18px;
+  background-color:#bbbfc4 ;
+}
+
+
+.flex-child:first-child select{
+  height: 30px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  text-align: center;
+  background-color: #b15959;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+  border: none;
+  
+}
 
 .flex-child.green{
   width: 70%;
@@ -233,3 +279,14 @@ body .about {
   display: flex;
   flex-direction: column-reverse; 
 }
+
+
+.message_scroll ul li {
+  background-color: #c25e00;
+  list-style: none ;
+  padding: 8px 10px;
+  width: 90%;
+  border-radius: 20px;
+  
+}
+

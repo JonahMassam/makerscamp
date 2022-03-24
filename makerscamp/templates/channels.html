@@ -12,6 +12,7 @@
 </html>
 {% extends 'base.html' %}
 
+
 <h1>{% block title %}Channles{% endblock %}</h1>
 
 
@@ -19,10 +20,10 @@
   <div class="flex-container">
 
     <div class="flex-child magenta">
-      <h1>Channels: <br>
+      <h1>Channels <br>
       <a class="action" href="{{ url_for('index.new_channel') }}">New Channel</a><br></h1>
       <form action="/join_channel" method="post">
-        Join a room:
+        Join a room
         <select name="channel_id">
           {% for channel in all_channels %}
             <option value={{channel.id}}> {{channel.name}} </option>
@@ -30,9 +31,11 @@
         </select>
         <input type="submit">
       </form>
-      {% for channel in chs %}
-        <a class="action" href="{{ url_for('index.channels', channel_id=channel.id) }}">{{channel.name}}</a><br>
-      {% endfor %}
+      <div class="channel-list">
+        {% for channel in chs %}
+          <ul><li><a class="action" href="{{ url_for('index.channels', channel_id=channel.id) }}">{{channel.name}}</a><br></li></ul>
+        {% endfor %}
+      </div>
     </div>
     
     <div class="flex-child green">
@@ -41,29 +44,60 @@
         {% if channel_id == 0 %}
           Select a channel
         {% else %}
-          
-            {% for message in messages %}
+          <ul id="message_list">
+          {% for message in messages %}
+            <li><h2>{{ message[1] }}</h2>
+            <h3>{{ message[0] }}</h3></li>
             <br>
-        
-                {{ message[1] }}
-                {{ message[0] }}
-              
-              <hr>
-            {% endfor %}
-          
-             {% endif %}
-        
+          {% endfor %}
+          </ul>
+        {% endif %}
       </div>
       {% if channel_id != 0 %}
-        <form action="/post_message" method="post">
+        <form name="new_message" action="/post_message" method="post">
           <input type="hidden" name="channel_id" value={{channel_id}}>
-          <input type="text" name="message">
-          <input type="submit">
+          <input id="myText" type="text" name="message">
+          <input type="submit" onclick="post_new_message()">
         </form>
       {% endif %}
+      
     </div>
     
   </div>
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+  <script type="text/javascript" charset="utf-8">
+
+    $('#submit').click(function(event) {
+      event.preventDefault();
+      getCitations();
+    });
+
+    var socket = io.connect('http://127.0.0.1:5000');
+
+    socket.on('connect', function() {
+        socket.emit('message', {data: 'I\'m connected!'});
+    });
+    
+    function post_new_message() {
+      socket.emit('new_message', {{channel_id}},'{{g.user.username}}' , document.getElementById("myText").value );
+    };
+
+
+    socket.on('get_message', function(data) {
+      console.log(data);
+      if (data["channel_id"] == {{channel_id}}) {
+        $('#message_list').append('<li>'+data["username"]+'</li>');
+        $('#message_list').append('<li>'+data["message"]+'</li>');
+      };
+
+    } );
+
+
+  </script>
+
 {% endblock %}
+
+
 
