@@ -1,6 +1,6 @@
 from makerscamp.classes.db import *
 from makerscamp.classes.channel import Channel
-from werkzeug.security import check_password_hash  #generate_password_hash
+from werkzeug.security import check_password_hash, generate_password_hash
 
 
 db_conn = DB
@@ -10,8 +10,9 @@ class User():
 
     @classmethod
     def create(cls, username, password):
+        hs_pass = generate_password_hash(db_conn.sanitize(password))
         db_conn.exec(
-            f"INSERT INTO users (username, password) VALUES ('{db_conn.sanitize(username)}', '{db_conn.sanitize(password)}')")
+            f"INSERT INTO users (username, password) VALUES ('{db_conn.sanitize(username)}', '{hs_pass}')")
 
     @classmethod
     def find(cls, username):
@@ -36,8 +37,7 @@ class User():
         self.id = id
 
     def authenticate(self, password):
-        #return check_password_hash(self.password, password)
-        return self.password == password
+        return check_password_hash(self.password, password)
 
     def channels(self):
         user_channels = DB.exec(
