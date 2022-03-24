@@ -20,10 +20,12 @@
   <div class="flex-container">
 
     <div class="flex-child magenta">
-      <h1>Channels <br>
-      <a class="action" href="{{ url_for('index.new_channel') }}">New Channel</a><br></h1>
+      <h1>Channels</h1>
+      <a href="{{ url_for('index.new_channel') }}">
+        <button type="button">New Channel </button>
+      </a>
       <form action="/join_channel" method="post">
-        Join a room
+        Join an existing channel:
         <select name="channel_id">
           {% for channel in all_channels %}
             <option value={{channel.id}}> {{channel.name}} </option>
@@ -31,6 +33,7 @@
         </select>
         <input type="submit">
       </form>
+      Enter a channel:
       <div class="channel-list">
         {% for channel in chs %}
           <ul><li><a class="action" href="{{ url_for('index.channels', channel_id=channel.id) }}">{{channel.name}}</a><br></li></ul>

@@ -16,8 +16,7 @@ bp = Blueprint('index', __name__)
 
 @bp.route('/')
 def home():
-    print("on index")
-    return render_template('home.html')
+    return redirect( url_for("index.channels", channel_id=0) )
 
 
 @bp.route('/jonahtest')
@@ -51,6 +50,8 @@ def new_channel():
     if request.method == 'POST':
         channel_name = request.form['name']
         error = None
+        if Channel.find(channel_name):
+            error = 'Channel already exists'
         if not channel_name:
             error = 'Name is required'
         if error is not None:
@@ -60,7 +61,7 @@ def new_channel():
             new_ch = Channel.find(channel_name)
             new_ch.add_user(g.user.id)
             user_channels = g.user.channels()
-            return render_template('channels.html', chs=user_channels, channel_id=new_ch.id)
+            return redirect( url_for("index.channels", channel_id=new_ch.id) )
     return render_template('new_channel.html')
     #return render_template('channels.html', chs=user_channels)
 
@@ -76,7 +77,9 @@ def post_new_message():
     if request.method == 'POST':
         message = request.form['message']
         channel_id = request.form['channel_id']
-        Message.create(g.user.id, channel_id, message)
+        if message:
+            print("hi")
+            Message.create(g.user.id, channel_id, message)
     return redirect( url_for("index.channels", channel_id=channel_id) )
 
 @bp.route('/join_channel', methods=('GET', 'POST'))
@@ -84,11 +87,11 @@ def post_new_message():
 def join_channel():
     channel_id = request.form['channel_id']
     result = DB.exec(f"SELECT * FROM user_channels WHERE user_id={g.user.id} AND channel_id={channel_id}")
-    print(result)
     if not result:
         DB.exec(f"INSERT INTO user_channels(user_id, channel_id) VALUES({g.user.id}, {channel_id})")
         return redirect( url_for("index.channels", channel_id=channel_id) )
-    return redirect( url_for("index.channels", channel_id=0) )
+    else:
+        return redirect( url_for('index.channels', channel_id=channel_id) )
 
 
 @socketio.on('message')
