@@ -23,7 +23,7 @@
       <h1>Channels <br>
       <a class="action" href="{{ url_for('index.new_channel') }}">New Channel</a><br></h1>
       <form action="/join_channel" method="post">
-        Join a room
+        Join a new channel
         <select name="channel_id">
           {% for channel in all_channels %}
             <option value={{channel.id}}> {{channel.name}} </option>

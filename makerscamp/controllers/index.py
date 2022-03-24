@@ -16,8 +16,7 @@ bp = Blueprint('index', __name__)
 
 @bp.route('/')
 def home():
-    print("on index")
-    return render_template('home.html')
+    return redirect( url_for("index.channels", channel_id=0) )
 
 
 @bp.route('/jonahtest')
@@ -51,6 +50,8 @@ def new_channel():
     if request.method == 'POST':
         channel_name = request.form['name']
         error = None
+        if Channel.find(channel_name):
+            error = 'Channel already exists'
         if not channel_name:
             error = 'Name is required'
         if error is not None:
