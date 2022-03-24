@@ -77,7 +77,9 @@ def post_new_message():
     if request.method == 'POST':
         message = request.form['message']
         channel_id = request.form['channel_id']
-        Message.create(g.user.id, channel_id, message)
+        if message:
+            print("hi")
+            Message.create(g.user.id, channel_id, message)
     return redirect( url_for("index.channels", channel_id=channel_id) )
 
 @bp.route('/join_channel', methods=('GET', 'POST'))
