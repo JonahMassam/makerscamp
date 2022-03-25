@@ -8,9 +8,7 @@ flask = "*"
 seleniumbase = "*"
 faker = "*"
 gunicorn = "*"
-setuptools = "*"
 psycopg2 = "*"
-flask-socketio = "*"
 
 [dev-packages]
 
