@@ -9,8 +9,6 @@ from makerscamp.classes.user import User
 from makerscamp.controllers.auth import login_required
 from makerscamp.classes.channel import Channel
 from makerscamp.classes.message import Message
-from makerscamp import socketio
-from flask_socketio import emit
 
 bp = Blueprint('index', __name__)
 
@@ -92,15 +90,4 @@ def join_channel():
         return redirect( url_for("index.channels", channel_id=channel_id) )
     else:
         return redirect( url_for('index.channels', channel_id=channel_id) )
-
-
-@socketio.on('message')
-def handle_message(data):
-    print('received message: ', " + ", data)
-
-
-@socketio.on('new_message')
-def new_message_posted(channel_id, username, message):
-    print(channel_id, " + ", message)
-    socketio.emit("get_message", {"channel_id":channel_id, "username":username, "message":message})
 

@@ -60,44 +60,13 @@
         <form name="new_message" action="/post_message" method="post">
           <input type="hidden" name="channel_id" value={{channel_id}}>
           <input id="myText" type="text" name="message">
-          <input type="submit" onclick="post_new_message()">
+          <input type="submit">
         </form>
       {% endif %}
       
     </div>
     
   </div>
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
-  <script type="text/javascript" charset="utf-8">
-
-    $('#submit').click(function(event) {
-      event.preventDefault();
-      getCitations();
-    });
-
-    var socket = io.connect('http://127.0.0.1:5000');
-
-    socket.on('connect', function() {
-        socket.emit('message', {data: 'I\'m connected!'});
-    });
-    
-    function post_new_message() {
-      socket.emit('new_message', {{channel_id}},'{{g.user.username}}' , document.getElementById("myText").value );
-    };
-
-
-    socket.on('get_message', function(data) {
-      console.log(data);
-      if (data["channel_id"] == {{channel_id}}) {
-        $('#message_list').append('<li><h2>'+data["message"]+'</h2><h4>'+data["username"]+'</h4></li><br>');
-      };
-
-    } );
-
-
-  </script>
 
 {% endblock %}
 
