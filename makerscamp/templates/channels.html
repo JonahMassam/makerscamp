@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>MakerCamp</title>
 </head>
 <body>
   
@@ -50,7 +50,7 @@
           <ul id="message_list">
           {% for message in messages %}
             <li><h2>{{ message[1] }}</h2>
-            <h3>{{ message[0] }}</h3></li>
+            <h4>{{ message[0] }}</h4></li>
             <br>
           {% endfor %}
           </ul>
@@ -91,8 +91,7 @@
     socket.on('get_message', function(data) {
       console.log(data);
       if (data["channel_id"] == {{channel_id}}) {
-        $('#message_list').append('<li>'+data["username"]+'</li>');
-        $('#message_list').append('<li>'+data["message"]+'</li>');
+        $('#message_list').append('<li><h2>'+data["message"]+'</h2><h4>'+data["username"]+'</h4></li><br>');
       };
 
     } );

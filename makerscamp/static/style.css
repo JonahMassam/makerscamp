@@ -239,7 +239,8 @@ body .about {
 }
 
 .flex-child:first-child input{
-  margin-left: 40px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
  .channel-list {
